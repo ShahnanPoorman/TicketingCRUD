@@ -27,16 +27,15 @@ public class Main {
             //4) ListTickets()
             //5) UpdateTicketContent(id)
             //6) DeleteTicket()
-            printMenu();
 
             //save user input to variable
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = getMenuChoice(sc);
 
             //switch statement to read user input
             switch (choice){
                 case 1:{
                     running = false;
+                    break;
                 }
                 case 2:{
                     //prompt user for ticket name
@@ -46,21 +45,18 @@ public class Main {
                     //display ticket info
                     System.out.println("Ticket created:");
                     System.out.println(ticketService.createTicket(ticketName, ticketContent).toString());
-                    System.out.println("Press enter to return to main menu.");
-                    //any button to return to main menu
-                    System.in.read();
-
+                    break;
                 }
                 case 3:{
                     //prompt user for ticket id
                     //display ticket info
                     //any button to return to main menu
-
+                    break;
                 }
                 case 4:{
                     //calls function to list all tickets
                     //any button to return to the main menu
-
+                    break;
                 }
                 case 5:{
                     //prompts user for ticket id
@@ -68,7 +64,7 @@ public class Main {
                     //confirm editing
                     //if so, prompts user for content
                     //if not, return to main menu
-
+                    break;
                 }
                 case 6:{
                     //prompt user for Ticket id
@@ -77,8 +73,13 @@ public class Main {
                     //if not, return to main menu
                     //if so, confirms deletion
                     //any button to return to the main menu
-
+                    break;
                 }
+            }
+
+            if(running){
+                System.out.println("Press enter to return to main menu.");
+                System.in.read();
             }
 
         }
@@ -87,7 +88,7 @@ public class Main {
         sc.close();
     }
 
-    static void printMenu(){
+    static int getMenuChoice(Scanner sc){
         System.out.println("""
         Please enter the number for the task you want to complete:
         
@@ -98,7 +99,9 @@ public class Main {
         5) UpdateTicketContent(id)
         6) DeleteTicket()
         """);
-
+        int choice = sc.nextInt();
+        sc.nextLine();
+        return choice;
     }
 
     static String promptForTicketInput(Scanner sc, String input){

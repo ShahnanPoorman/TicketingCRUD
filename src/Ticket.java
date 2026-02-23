@@ -1,6 +1,6 @@
 
 public class Ticket {
-    private static int counter = 0;
+    private static int counter = 1;
     private final int id;
     private String name;
     private String content;
