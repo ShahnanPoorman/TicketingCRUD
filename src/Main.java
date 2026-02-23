@@ -38,24 +38,21 @@ public class Main {
                     break;
                 }
                 case 2:{
-                    //prompt user for ticket name
-                    ticketName = promptForTicketInput(sc,"name");
-                    //prompt user for ticket content
-                    ticketContent = promptForTicketInput(sc, "content");
-                    //display ticket info
+                    Ticket ticket = ticketService.createTicket(promptForTicketInput(sc,"name"),
+                            promptForTicketInput(sc, "content"));
                     System.out.println("Ticket created:");
-                    System.out.println(ticketService.createTicket(ticketName, ticketContent).toString());
+                    System.out.println(ticket.toString());
                     break;
                 }
                 case 3:{
-                    //prompt user for ticket id
-                    //display ticket info
-                    //any button to return to main menu
+                    System.out.println(ticketService.getTicketById(promptForTicketId(sc, "read")).toString());
                     break;
                 }
                 case 4:{
-                    //calls function to list all tickets
-                    //any button to return to the main menu
+                    System.out.println("Listing all tickets!");
+                    for(Ticket ticket : ticketService.getAllTickets()){
+                        System.out.println(ticket.toString());
+                    }
                     break;
                 }
                 case 5:{
@@ -110,8 +107,8 @@ public class Main {
 
     }
 
-    static int promptForTicketId(Scanner sc){
-        System.out.println("What is the id of the ticket?" );
+    static int promptForTicketId(Scanner sc, String input){
+        System.out.println("What is the id of the ticket you would like to " + input + "?" );
         return sc.nextInt();
     }
 }
