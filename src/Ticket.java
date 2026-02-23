@@ -1,4 +1,3 @@
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Ticket {
     private static int counter = 0;
@@ -47,7 +46,7 @@ public class Ticket {
         }
         else {
 
-            this.name = "Ticket " + id;
+            this.name = "Ticket #" + id;
         }
     }
 
@@ -61,7 +60,7 @@ public class Ticket {
     }
 
     public String toString(){
-        return String.format("\n     id: %s \n   name: %s \ncontent: %s", id, name, content);
+        return String.format("\n     id: %s \n   name: %s \ncontent: %s\n", id, name, content);
     }
 
 
