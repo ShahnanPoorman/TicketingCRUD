@@ -4,14 +4,14 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //bool kanban that's true (not constant)
-        boolean kanban = true;
+        //bool running that's true (not constant)
+        boolean running = true;
 
         //scanner object!
         Scanner sc = new Scanner(System.in);
 
-        //while kanban == true loop
-        while (kanban){
+        //while running == true loop
+        while (running){
             //print MainMenu()
             //1) Exit/Back()
             //2) MakeTicket()
@@ -27,7 +27,7 @@ public class Main {
             //switch statement to read user input
             switch (choice){
                 case 1:{
-                    kanban = false;
+                    running = false;
                 }
                 case 2:{
                     //prompt user for ticket name
@@ -55,7 +55,7 @@ public class Main {
 
                 }
                 case 6:{
-                    //prompt user for itcket id
+                    //prompt user for Ticket id
                     //display ticket info
                     //confirms ticket deletion
                     //if not, return to main menu
@@ -66,10 +66,7 @@ public class Main {
             }
         }
 
-
-
-
-
+        sc.close();
     }
 
     static void printMenu(){
@@ -84,5 +81,16 @@ public class Main {
         6) DeleteTicket()
         """);
 
+    }
+
+    static String promptForTicketInput(Scanner sc, String input){
+        System.out.println("What would you like the ticket's " + input + " to be?" );
+        return sc.nextLine();
+
+    }
+
+    static int promptForTicketId(Scanner sc){
+        System.out.println("What is the id of the ticket?" );
+        return sc.nextInt();
     }
 }
