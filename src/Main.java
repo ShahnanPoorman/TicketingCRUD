@@ -35,11 +35,20 @@ public class Main {
                     break;
                 }
                 case 2:{
-                    handleCreateTicket(sc, ticketService);
+                    try{
+                        handleCreateTicket(sc, ticketService);
+                    } catch(IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 }
                 case 3:{
-                    System.out.println(ticketService.getTicketById(promptForTicketId(sc, "read")).toString());
+                    try{
+                        System.out.println(ticketService.getTicketById(promptForTicketId(sc, "read")).toString());
+                    } catch(NullPointerException e){
+                        System.out.println("Ticket with that id does not exist!");
+                    }
                     break;
                 }
                 case 4:{
@@ -50,16 +59,27 @@ public class Main {
                     break;
                 }
                 case 5:{
-                    handleUpdateTicketName(sc, ticketService);
+                    try{
+                        handleUpdateTicketName(sc, ticketService);
+                    } catch(NullPointerException e){
+                        System.out.println("Ticket with that id does not exist!");
+                    }
                     break;
-
                 }
                 case 6:{
-                    handleUpdateTicketContent(sc, ticketService);
+                    try{
+                        handleUpdateTicketContent(sc, ticketService);
+                    } catch(NullPointerException e){
+                        System.out.println("Ticket with that id does not exist!");
+                    }
                     break;
                 }
                 case 7:{
-                    handleDeleteTicket(sc, ticketService);
+                    try{
+                        handleDeleteTicket(sc, ticketService);
+                    } catch(NullPointerException e){
+                        System.out.println("Ticket with that id does not exist!");
+                    }
                     break;
                 }
             }
@@ -85,6 +105,11 @@ public class Main {
     static void handleUpdateTicketName(Scanner sc, TicketService ticketService){
         //prompts user for ticket id
         Ticket ticket = ticketService.getTicketById(promptForTicketId(sc, "edit(name)"));
+        if (ticket == null) {
+            System.out.println("Ticket not found.");
+            return;
+        }
+
         //display ticket info
         System.out.println(ticket);
         System.out.println("What would you like to replace the ticket's name with?");
@@ -97,6 +122,11 @@ public class Main {
     static void handleUpdateTicketContent(Scanner sc, TicketService ticketService){
         //prompts user for ticket id
         Ticket ticket = ticketService.getTicketById(promptForTicketId(sc, "edit(content)"));
+        if (ticket == null) {
+            System.out.println("Ticket not found.");
+            return;
+        }
+
         //display ticket info
         System.out.println(ticket);
         System.out.println("What would you like to replace the ticket's content with?");
@@ -109,6 +139,11 @@ public class Main {
     static void handleDeleteTicket(Scanner sc, TicketService ticketService){
         //prompts user for ticket id
         Ticket ticket = ticketService.getTicketById(promptForTicketId(sc, "delete"));
+        if (ticket == null) {
+            System.out.println("Ticket not found.");
+            return;
+        }
+
         //display ticket info
         System.out.println(ticket);
         System.out.println("Is this the ticket that you'd like to delete? y/n?");
