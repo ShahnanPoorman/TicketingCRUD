@@ -20,6 +20,13 @@ public class TicketService {
         return new ArrayList<>(ticketMap.values());
     }
 
+    public boolean updateTicketName(int id, String newName){
+        Ticket ticket = ticketMap.get(id);
+        if(ticket == null) return false;
+
+        ticket.setName(newName);
+        return true;
+    }
     public boolean updateTicketContent(int id, String newContent){
         Ticket ticket = ticketMap.get(id);
         if(ticket == null) return false;
