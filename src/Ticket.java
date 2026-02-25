@@ -6,9 +6,11 @@ public class Ticket {
     private final int id;
     private String name;
     private final LocalDateTime createdAt;
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy" +
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy" +
             "-MM-dd HH:mm");
     private String content;
+    private static final int MIN_CONTENT_LENGTH = 25;
+    private static final int MAX_CONTENT_LENGTH = 150;
 
 
 
@@ -31,8 +33,9 @@ public class Ticket {
         if(content.length() > 25 && content.length() < 150) {
             this.content = content;
         } else {
-            throw new IllegalArgumentException("Content cannot be shorter than 25 characters or " +
-                    "longer than 150!");
+            throw new IllegalArgumentException(String.format("Content cannot be shorter than %s " +
+                    "characters or " +
+                    "longer than %s!", MIN_CONTENT_LENGTH, MAX_CONTENT_LENGTH));
         }
     }
 
@@ -73,7 +76,7 @@ public class Ticket {
     @Override
     public String toString(){
         return String.format("\n      id: %s\ncreation: %s\n    name: %s \n content: %s\n", id,
-                createdAt.format(dateTimeFormatter),
+                createdAt.format(DATE_FORMATTER),
                 name,
                 content);
     }
