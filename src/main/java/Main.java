@@ -191,7 +191,7 @@ public class Main {
     }
 
     static int promptForTicketId(Scanner sc, String action) {
-        int id = -1;
+        int id;
         while (true) {
             System.out.println("What is the id of the ticket you would like to " + action + "?");
             String input = sc.nextLine().trim();
