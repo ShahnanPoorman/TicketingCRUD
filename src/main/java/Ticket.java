@@ -1,11 +1,17 @@
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Entity
+@Table(name="TICKET", schema="TICKET_MANAGER")
 public class Ticket {
-    private static int counter = 1;
-    private final int id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
     private String name;
-    private final LocalDateTime createdAt;
+
+    @Column(nullable = false, updatable = false)
+    private final LocalDateTime createdAt = LocalDateTime.now();
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy" +
             "-MM-dd HH:mm");
     private String content;
@@ -13,9 +19,10 @@ public class Ticket {
     private static final int MAX_CONTENT_LENGTH = 150;
 
 
+    public Ticket(
+    ){}
 
     public Ticket(String name, String content){
-        this.id = counter++;
 
         if (name == null) throw new IllegalArgumentException("Name cannot be null");
         name = name.trim();
@@ -27,8 +34,6 @@ public class Ticket {
 
             this.name = "Ticket #" + id;
         }
-
-        this.createdAt = LocalDateTime.now();
 
         if(content.length() > 25 && content.length() < 150) {
             this.content = content;
