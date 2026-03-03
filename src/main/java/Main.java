@@ -1,20 +1,13 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws IOException {
-        //bool running that's true (not constant)
         boolean running = true;
 
-        //Ticket Service
         TicketService ticketService = new TicketService();
-
-        //scanner object!
         Scanner sc = new Scanner(System.in);
 
-        //while running == true loop
         while (running){
             //print MainMenu()
             //1) Exit/Back()
@@ -25,10 +18,8 @@ public class Main {
             //6) UpdateTicketContent(id)
             //7) DeleteTicket()
 
-            //save user input to variable
             int choice = getMenuChoice(sc);
 
-            //switch statement to read user input
             switch (choice){
                 case 1:{
                     running = false;
@@ -104,14 +95,12 @@ public class Main {
     }
 
     static void handleUpdateTicketName(Scanner sc, TicketService ticketService){
-        //prompts user for ticket id
         Ticket ticket = ticketService.getTicketById(promptForTicketId(sc, "edit(name)"));
         if (ticket == null) {
             System.out.println("Ticket not found.");
             return;
         }
 
-        //display ticket info
         System.out.println(ticket);
         System.out.println("What would you like to replace the ticket's name with?");
 
@@ -121,14 +110,12 @@ public class Main {
     }
 
     static void handleUpdateTicketContent(Scanner sc, TicketService ticketService){
-        //prompts user for ticket id
         Ticket ticket = ticketService.getTicketById(promptForTicketId(sc, "edit(content)"));
         if (ticket == null) {
             System.out.println("Ticket not found.");
             return;
         }
 
-        //display ticket info
         System.out.println(ticket);
         System.out.println("What would you like to replace the ticket's content with?");
 
@@ -138,14 +125,12 @@ public class Main {
     }
 
     static void handleDeleteTicket(Scanner sc, TicketService ticketService){
-        //prompts user for ticket id
         Ticket ticket = ticketService.getTicketById(promptForTicketId(sc, "delete"));
         if (ticket == null) {
             System.out.println("Ticket not found.");
             return;
         }
 
-        //display ticket info
         System.out.println(ticket);
         System.out.println("Is this the ticket that you'd like to delete? y/n?");
         String confirmation = sc.nextLine().trim();
