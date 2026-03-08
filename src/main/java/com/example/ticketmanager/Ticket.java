@@ -5,19 +5,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
+@Table(name = "tickets")
 public class Ticket {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false, updatable = false)
-    private final LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at", nullable = false, updatable = false, insertable = false)
+    private LocalDateTime createdAt;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy" +
             "-MM-dd HH:mm");
+
+    @Column(name = "content", nullable = false)
     private String content;
-    private static final int MIN_CONTENT_LENGTH = 25;
-    private static final int MAX_CONTENT_LENGTH = 150;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 
     public Ticket(
@@ -41,11 +48,11 @@ public class Ticket {
         } else {
             throw new IllegalArgumentException(String.format("Content cannot be shorter than %s " +
                     "characters or " +
-                    "longer than %s!", MIN_CONTENT_LENGTH, MAX_CONTENT_LENGTH));
+                    "longer than %s!", 10, 100));
         }
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -57,32 +64,19 @@ public class Ticket {
         return content;
     }
 
-    public void setName(String name){
-        if (name == null) throw new IllegalArgumentException("Name cannot be null");
-        name = name.trim();
+    public User getUser(){return user;}
 
-        if(name.length() > 2 && name.length() < 50){
-            this.name = name;
-        }
-        else {
+    public void setName(String name){this.name = name;}
 
-            this.name = "com.example.ticketmaster.Ticket #" + id;
-        }
-    }
+    public void setContent(String content){this.content = content;}
 
-    public void setContent(String content){
-        if(content.length() >= MIN_CONTENT_LENGTH && content.length() <= MAX_CONTENT_LENGTH) {
-            this.content = content;
-        } else {
-            throw new IllegalArgumentException("Content cannot be shorter than 25 characters or " +
-                    "longer than 150!");
-        }
-    }
+    public void setUser(User user){this.user = user;}
 
     @Override
     public String toString(){
+        String s = createdAt != null ? createdAt.format(DATE_FORMATTER) : "not set";
         return String.format("\n      id: %s\ncreation: %s\n    name: %s \n content: %s\n", id,
-                createdAt.format(DATE_FORMATTER),
+                s,
                 name,
                 content);
     }
