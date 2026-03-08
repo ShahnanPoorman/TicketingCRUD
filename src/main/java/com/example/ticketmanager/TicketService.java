@@ -15,12 +15,15 @@ public class TicketService {
         this.ticketRepository = ticketRepository;
     }
 
-    public Ticket createTicket(String name, String content){
-        Ticket ticket = new Ticket(name, content);
+    public Ticket createTicket(String name, String content, User user){
+        Ticket ticket = new Ticket();
+        ticket.setName(name);
+        ticket.setContent(content);
+        ticket.setUser(user);
         return ticketRepository.save(ticket);
     }
 
-    public Ticket getTicketById(int id){
+    public Ticket getTicketById(long id){
         return ticketRepository
                 .findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -29,14 +32,14 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public Ticket updateTicketName(int id, String newName){
+    public Ticket updateTicketName(long id, String newName){
         Ticket ticket = ticketRepository
                 .findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         ticket.setName(newName);
         return ticketRepository.save(ticket);
     }
-    public Ticket updateTicketContent(int id, String newContent){
+    public Ticket updateTicketContent(long id, String newContent){
         Ticket ticket = ticketRepository
                 .findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -44,7 +47,7 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
-    public void deleteTicket(int id){
+    public void deleteTicket(long id){
         if (!ticketRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

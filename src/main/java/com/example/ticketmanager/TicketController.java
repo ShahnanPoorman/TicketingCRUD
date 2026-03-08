@@ -18,11 +18,12 @@ public class TicketController {
 
     @PostMapping
     Ticket createTicket(@RequestBody CreateTicketRequest request) {
-        return ticketService.createTicket(request.getName(), request.getContent());
+        return ticketService.createTicket(request.getName(), request.getContent(),
+                request.getUser());
     }
 
     @GetMapping("/{id}")
-    Ticket getTicket(@PathVariable int id){
+    Ticket getTicket(@PathVariable long id){
         return ticketService.getTicketById(id);
     }
 
@@ -32,17 +33,17 @@ public class TicketController {
     }
 
     @PutMapping("/{id}/name")
-    Ticket updateTicketName(@PathVariable int id, @RequestBody UpdateTicketRequest request){
+    Ticket updateTicketName(@PathVariable long id, @RequestBody UpdateTicketRequest request){
         return ticketService.updateTicketName(id, request.getValue());
     }
 
     @PutMapping("/{id}/content")
-    Ticket updateTicketContent(@PathVariable int id, @RequestBody UpdateTicketRequest request){
+    Ticket updateTicketContent(@PathVariable long id, @RequestBody UpdateTicketRequest request){
         return ticketService.updateTicketContent(id, request.getValue());
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> handleDeleteTicket(@PathVariable int id){
+    ResponseEntity<Void> handleDeleteTicket(@PathVariable long id){
         ticketService.deleteTicket(id);
         return ResponseEntity.noContent().build();
     }
