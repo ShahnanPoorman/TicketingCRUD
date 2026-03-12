@@ -1,5 +1,6 @@
 package com.example.ticketmanager;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class TicketController {
     }
 
     @PostMapping
-    Ticket createTicket(@RequestBody CreateTicketRequest request) {
+    Ticket createTicket(@Valid @RequestBody CreateTicketRequest request) {
         return ticketService.createTicket(request.getName(), request.getContent(),
                 request.getUserId());
     }
@@ -33,12 +34,13 @@ public class TicketController {
     }
 
     @PutMapping("/{id}/name")
-    Ticket updateTicketName(@PathVariable long id, @RequestBody UpdateTicketRequest request){
+    Ticket updateTicketName(@Valid @PathVariable long id, @RequestBody UpdateTicketRequest request){
         return ticketService.updateTicketName(id, request.getValue());
     }
 
     @PutMapping("/{id}/content")
-    Ticket updateTicketContent(@PathVariable long id, @RequestBody UpdateTicketRequest request){
+    Ticket updateTicketContent(@Valid @PathVariable long id,
+                               @RequestBody UpdateTicketRequest request){
         return ticketService.updateTicketContent(id, request.getValue());
     }
 

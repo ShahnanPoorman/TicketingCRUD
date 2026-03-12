@@ -1,9 +1,17 @@
 package com.example.ticketmanager;
+import jakarta.validation.constraints.*;
 
 public class CreateTicketRequest {
+    @NotBlank(message = "Name can not be null or empty!")
+    @Size(min = 5, max = 30, message = "Name must be between 5 and 30 characters")
     private String name;
+
+    @NotBlank(message = "Content can not be null or empty!")
+    @Size(min = 5, max = 1000, message = "Content must be between 5 and 1000 characters")
     private String content;
-    private long userId;
+
+    @NotNull(message = "User ID is required")
+    private Long userId;
 
     public CreateTicketRequest(){}
 
