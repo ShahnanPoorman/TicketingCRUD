@@ -12,7 +12,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>TicketManager</name>
     <description>RESTful
-        com.example.ticketmanager.Ticket
+        com.example.ticketmanager.model.Ticket
         Management
         API
         built

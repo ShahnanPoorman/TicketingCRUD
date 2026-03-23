@@ -1,5 +1,6 @@
-package com.example.ticketmanager;
+package com.example.ticketmanager.repository;
 
+import com.example.ticketmanager.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

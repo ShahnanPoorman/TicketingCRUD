@@ -1,5 +1,9 @@
-package com.example.ticketmanager;
+package com.example.ticketmanager.controller;
 
+import com.example.ticketmanager.dto.CreateTicketRequest;
+import com.example.ticketmanager.model.Ticket;
+import com.example.ticketmanager.service.TicketService;
+import com.example.ticketmanager.dto.UpdateTicketRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,13 @@
-package com.example.ticketmanager;
+package com.example.ticketmanager.service;
 
+import com.example.ticketmanager.model.Ticket;
+import com.example.ticketmanager.model.User;
+import com.example.ticketmanager.repository.TicketRepository;
+import com.example.ticketmanager.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
 import java.util.*;
 
 @Service

@@ -1,4 +1,4 @@
-package com.example.ticketmanager;
+package com.example.ticketmanager.dto;
 import jakarta.validation.constraints.*;
 
 public class CreateTicketRequest {

@@ -1,4 +1,4 @@
-package com.example.ticketmanager;
+package com.example.ticketmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

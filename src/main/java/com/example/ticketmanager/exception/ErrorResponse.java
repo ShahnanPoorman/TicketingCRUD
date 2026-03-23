@@ -1,4 +1,4 @@
-package com.example.ticketmanager;
+package com.example.ticketmanager.exception;
 
 import java.util.List;
 

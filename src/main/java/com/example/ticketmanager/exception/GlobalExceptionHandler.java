@@ -1,4 +1,4 @@
-package com.example.ticketmanager;
+package com.example.ticketmanager.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
